@@ -11,7 +11,7 @@ import (
 	"github.com/IeemeliK/aocgo/internal/year2025/day01"
 )
 
-var days = map[int]func(int, bufio.Reader) (string, error){
+var days = map[int]func(int, bufio.Reader) (any, error){
 	1: day01.Solve,
 }
 
@@ -25,6 +25,7 @@ func main() {
 	dayFlag := flag.Int("day", 0, "day number 1-12")
 	partFlag := flag.Int("part", 1, "part 1 or 2")
 	inputFlag := flag.String("input", "", "optional input file (default: internal/dayXX/input.txt)")
+	testFlag := flag.Bool("test", false, "determines wether to use test input or not")
 	flag.Parse()
 
 	solver, ok := days[*dayFlag]
@@ -34,9 +35,15 @@ func main() {
 
 	inputPath := *inputFlag
 	if inputPath == "" {
+		inputFile := "input.txt"
+		if *testFlag {
+			inputFile = "input_test.txt"
+		}
+
 		inputPath = filepath.Join("internal",
+			"year2025",
 			fmt.Sprintf("day%02d", *dayFlag),
-			"input.txt",
+			inputFile,
 		)
 	}
 
