@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Part1(inputBuffer bufio.Reader) (any, error) {
+func Part1(inputBuffer bufio.Reader) (int, error) {
 	dial := 50
 	count := 0
 
@@ -43,8 +43,41 @@ func Part1(inputBuffer bufio.Reader) (any, error) {
 	return count, nil
 }
 
-func Part2(inputBuffer bufio.Reader) (string, error) {
-	return "", errors.New("not implemented")
+func Part2(inputBuffer bufio.Reader) (int, error) {
+	dial := 50
+	count := 0
+
+	for {
+		line, err := inputBuffer.ReadString('\n')
+		if err != nil {
+			break
+		}
+
+		line = strings.TrimSpace(line)
+
+		direction := line[0]
+		rotation, err := strconv.Atoi(line[1:])
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		switch direction {
+		case 'R':
+			dial = dial + rotation
+			count += dial / 99
+			dial = dial % 100
+		case 'L':
+			dial = dial - rotation + 100
+			count += dial / 99
+			dial = dial % 100
+		}
+
+		if dial == 0 {
+			count++
+		}
+	}
+
+	return count, nil
 }
 
 func Solve(part int, inputBuffer bufio.Reader) (any, error) {
