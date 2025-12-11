@@ -4,7 +4,6 @@ package day01
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -33,7 +32,6 @@ func Part1(inputBuffer bufio.Reader) (int, error) {
 			dial = (dial + rotation) % 100
 		case 'L':
 			dial = (dial - rotation) % 100
-			fmt.Printf("dial: %v\n", dial)
 		}
 
 		if dial == 0 {
