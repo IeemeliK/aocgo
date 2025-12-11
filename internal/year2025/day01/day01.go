@@ -1,4 +1,4 @@
-// Package day01 of aoc25
+// Package day01 of aoc2025
 package day01
 
 import (
