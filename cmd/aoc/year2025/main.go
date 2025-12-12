@@ -9,10 +9,12 @@ import (
 	"path/filepath"
 
 	"github.com/IeemeliK/aocgo/internal/year2025/day01"
+	"github.com/IeemeliK/aocgo/internal/year2025/day02"
 )
 
 var days = map[int]func(int, bufio.Reader) (any, error){
 	1: day01.Solve,
+	2: day02.Solve,
 }
 
 func check(e error) {
